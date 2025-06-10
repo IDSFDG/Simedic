@@ -65611,6 +65611,7 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
     
     ];
              var table = new Tabulator("#tabExample",
+    
      {   dependencies:{
             XLSX:XLSX,
         },
@@ -65625,6 +65626,48 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
               //  row.getElement().classList.add("Modern"); //mark rows with age greater than or equal to 18 as successful;
            // row.getElement().style.backgroundColor = "#d5f7d7"; //apply css change to row element
             row.getElement().style.backgroundColor = "#7cbfb2";
+            }
+        },
+    
+           locale:true,
+          langs:{
+            "espaniol":{
+                "columns":{
+                    "name":"Name", //replace the title of column name with the value "Name"
+                },
+                "data":{
+                    "loading":"Loading", //data loader text
+                    "error":"Error", //data error text
+                },
+                "groups":{ //copy for the auto generated item count in group header
+                    "item":"item", //the singular  for item
+                    "items":"items", //the plural for items
+                },
+                "pagination":{
+                    "page_size":"Tam.Pag.", //label for the page size select element
+                    "page_title":"Ver Pag.",//tooltip text for the numeric page button, appears in front of the page number (eg. "Show Page" will result in a tool tip of "Show Page 1" on the page 1 button)
+                    "first":"Prim.", //text for the first page button
+                    "first_title":"Prim.Pag", //tooltip text for the first page button
+                    "last":"Ultim.",
+                    "last_title":"Ult.Pag.",
+                    "prev":"Prev.",
+                    "prev_title":"Pag.Ant.",
+                    "next":"Sig.",
+                    "next_title":"Pag.Sig.",
+                    "all":"All",
+                    "counter":{
+                        "showing": "Ver",
+                        "of": "de",
+                        "rows": "rengs",
+                        "pages": "paginas",
+                    }
+                },
+                "headerFilters":{
+                    "default":"filter column...", //default header filter placeholder text
+                    "columns":{
+                        "name":"filter name...", //replace default header filter text for column name
+                    }
+                }
             }
         },
        // pagination:true, //enable pagination
@@ -65667,6 +65710,7 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
     
     
        table.on("tableBuilt", function(){
+          table.setLocale("espaniol"); //set locale to espaniol
            table.activeSheet("uno"); //make the info sheet active
            table.setSheetData("uno",sheetDataConsulta);       // API
       //     alert (len);
