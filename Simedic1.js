@@ -65750,6 +65750,9 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
         console.log('id',selpacid);
      //   alert('paciente');
      //   alert(selpacid);
+    
+       edPaciente.value = selpacid;
+       edPacNombre.value =selpacnom;
     $mod.CargarConsultaMedica(selpacid);
     $mod.CargarEstudiosMedicos(selpacid);
     $mod.CargarAnalisisMedicos(selpacid);
@@ -67044,8 +67047,10 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton8Click(Sender);
     };
     this.WebFormCreate = function (Sender) {
+      this.WebPanel4.SetVisible(false);
       pas.uCargarConsultas.CargarPacientes();
       this.WebPanel4.GetElementHandle().style.setProperty("overflow","visible");
+      this.WebPanel4.SetVisible(true);
     };
     this.Imprimir1Click = function (Sender) {
       this.btn_imprimirClick(Sender);
@@ -67474,8 +67479,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton10 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebPanel3 = pas["WEBLib.ExtCtrls"].TPanel.$create("Create$2",["table-tabs"]);
       this.WebPanel4 = pas["WEBLib.ExtCtrls"].TPanel.$create("Create$1",[this]);
-      this.WebLabel2 = pas["WEBLib.StdCtrls"].TLabel.$create("Create$1",[this]);
       this.WebLabel1 = pas["WEBLib.StdCtrls"].TLabel.$create("Create$1",[this]);
+      this.WebLabel2 = pas["WEBLib.StdCtrls"].TLabel.$create("Create$1",[this]);
       this.WebButton9 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.edPaciente = pas["WEBLib.StdCtrls"].TEdit.$create("Create$2",["edPaciente"]);
       this.edPacNombre = pas["WEBLib.StdCtrls"].TEdit.$create("Create$2",["edPacNombre"]);
@@ -67528,8 +67533,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton10.BeforeLoadDFMValues();
       this.WebPanel3.BeforeLoadDFMValues();
       this.WebPanel4.BeforeLoadDFMValues();
-      this.WebLabel2.BeforeLoadDFMValues();
       this.WebLabel1.BeforeLoadDFMValues();
+      this.WebLabel2.BeforeLoadDFMValues();
       this.WebButton9.BeforeLoadDFMValues();
       this.edPaciente.BeforeLoadDFMValues();
       this.edPacNombre.BeforeLoadDFMValues();
@@ -67847,24 +67852,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebPanel4.FElementBodyClassName = "card-body";
         this.WebPanel4.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebPanel4.SetTabOrder(4);
-        this.WebLabel2.SetParentComponent(this.WebPanel4);
-        this.WebLabel2.SetName("WebLabel2");
-        this.WebLabel2.SetLeft(220);
-        this.WebLabel2.SetTop(15);
-        this.WebLabel2.SetWidth(227);
-        this.WebLabel2.SetHeight(19);
-        this.WebLabel2.SetAlignment(pas.Classes.TAlignment.taCenter);
-        this.WebLabel2.SetCaption("Expediente Clínico Paciente");
-        this.WebLabel2.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
-        this.WebLabel2.FFont.FCharset = 1;
-        this.WebLabel2.FFont.SetColor(65793);
-        this.WebLabel2.FFont.SetHeight(-16);
-        this.WebLabel2.FFont.SetName("Tahoma");
-        this.WebLabel2.FFont.SetStyle(rtl.createSet(pas["WEBLib.Graphics"].TFontStyle.fsBold));
-        this.WebLabel2.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
-        this.WebLabel2.SetHeightPercent(100.000000000000000000);
-        this.WebLabel2.SetParentFont(false);
-        this.WebLabel2.SetWidthPercent(100.000000000000000000);
+        this.WebPanel4.SetVisible(false);
         this.WebLabel1.SetParentComponent(this.WebPanel4);
         this.WebLabel1.SetName("WebLabel1");
         this.WebLabel1.SetLeft(24);
@@ -67875,8 +67863,26 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebLabel1.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebLabel1.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.WebLabel1.SetHeightPercent(100.000000000000000000);
-        this.WebLabel1.SetVisible(false);
         this.WebLabel1.SetWidthPercent(100.000000000000000000);
+        this.WebLabel2.SetParentComponent(this.WebPanel4);
+        this.WebLabel2.SetName("WebLabel2");
+        this.WebLabel2.SetLeft(0);
+        this.WebLabel2.SetTop(0);
+        this.WebLabel2.SetWidth(701);
+        this.WebLabel2.SetHeight(23);
+        this.WebLabel2.SetAlign(pas["WEBLib.Controls"].TAlign.alTop);
+        this.WebLabel2.SetAlignment(pas.Classes.TAlignment.taCenter);
+        this.WebLabel2.SetCaption("Expediente Clínico Paciente");
+        this.WebLabel2.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
+        this.WebLabel2.FFont.FCharset = 1;
+        this.WebLabel2.FFont.SetColor(65793);
+        this.WebLabel2.FFont.SetHeight(-19);
+        this.WebLabel2.FFont.SetName("Tahoma");
+        this.WebLabel2.FFont.SetStyle(rtl.createSet(pas["WEBLib.Graphics"].TFontStyle.fsBold));
+        this.WebLabel2.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
+        this.WebLabel2.SetHeightPercent(100.000000000000000000);
+        this.WebLabel2.SetParentFont(false);
+        this.WebLabel2.SetWidthPercent(100.000000000000000000);
         this.WebButton9.SetParentComponent(this.WebPanel4);
         this.WebButton9.SetName("WebButton9");
         this.WebButton9.SetLeft(3);
@@ -67903,7 +67909,6 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.edPaciente.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.edPaciente.SetHeightPercent(100.000000000000000000);
         this.edPaciente.SetReadOnly(true);
-        this.edPaciente.SetVisible(false);
         this.edPaciente.SetWidthPercent(100.000000000000000000);
         this.edPacNombre.SetParentComponent(this.WebPanel4);
         this.edPacNombre.SetName("edPacNombre");
@@ -67917,7 +67922,6 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.edPacNombre.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.edPacNombre.SetHeightPercent(100.000000000000000000);
         this.edPacNombre.SetReadOnly(true);
-        this.edPacNombre.SetVisible(false);
         this.edPacNombre.SetWidthPercent(100.000000000000000000);
         this.WebButton11.SetParentComponent(this.WebPanel4);
         this.WebButton11.SetName("WebButton11");
@@ -68096,8 +68100,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton10.AfterLoadDFMValues();
         this.WebPanel3.AfterLoadDFMValues();
         this.WebPanel4.AfterLoadDFMValues();
-        this.WebLabel2.AfterLoadDFMValues();
         this.WebLabel1.AfterLoadDFMValues();
+        this.WebLabel2.AfterLoadDFMValues();
         this.WebButton9.AfterLoadDFMValues();
         this.edPaciente.AfterLoadDFMValues();
         this.edPacNombre.AfterLoadDFMValues();
