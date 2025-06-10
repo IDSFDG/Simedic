@@ -65508,7 +65508,7 @@ rtl.module("WEBLib.SideMenu",["System","Classes","SysUtils","Types","WEBLib.Cont
     rtl.addIntf(this,pas.System.IUnknown);
   });
 },["WEBLib.Utils"]);
-rtl.module("uCargarConsultas",["System"],function () {
+rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","WEBLib.Controls","WEBLib.Forms","WEBLib.Dialogs","WEBLib.Controls","WEBLib.WebCtrls","WEBLib.StdCtrls","WEBLib.StdCtrls","WEBLib.ExtCtrls","WEBLib.REST","WEBLib.JQCtrls","WEBLib.SideMenu","WEBLib.Menus","WEBLib.Menus"],function () {
   "use strict";
   var $mod = this;
   this.CargarPacientes = function () {
@@ -65627,8 +65627,12 @@ rtl.module("uCargarConsultas",["System"],function () {
             row.getElement().style.backgroundColor = "#7cbfb2";
             }
         },
-        pagination:true, //enable pagination
-        paginationSize:10, // this option can take any positive integer value
+       // pagination:true, //enable pagination
+      //  paginationSize:10, // this option can take any positive integer value
+        paginationSize:5,
+        paginationSizeSelector:[5, 10, 15],
+        pagination:true,
+        paginationElement:paginacionSCR, //build pagination controls in this element
     
         responsiveLayout:true, // enable responsive layouts
         responsiveLayout:"collapse", // collapse columns that no longer fit on the table into a list under the row
@@ -65637,6 +65641,7 @@ rtl.module("uCargarConsultas",["System"],function () {
           rowHeader:{field:"_id", hozAlign:"center", headerSort:false, title:"Sel.Ren.", headerWordWrap:true},
      // height:"211px",
      //   height:"100%",
+        height:"311px",
         height:"70%",
       spreadsheet:true,
       spreadsheetRows:len,
@@ -66333,6 +66338,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton11 = null;
       this.WebButton12 = null;
       this.WebButton13 = null;
+      this.WebScrollBox1 = null;
+      this.AnlisisGrfico1 = null;
     };
     this.$final = function () {
       this.WebPanel1 = undefined;
@@ -66387,6 +66394,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton11 = undefined;
       this.WebButton12 = undefined;
       this.WebButton13 = undefined;
+      this.WebScrollBox1 = undefined;
+      this.AnlisisGrfico1 = undefined;
       pas["WEBLib.Forms"].TForm.$final.call(this);
     };
     this.WebButton1Click = function (Sender) {
@@ -67155,10 +67164,11 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       
           spreadsheetSheets:sheets,        // DEFINICION HOJAS ARREGLO
           spreadsheetSheetTabs:true,
-        //  spreadsheetSheetTabsElement:"#table-tabs", //insert tabs in element with id of table-tabs
+         // spreadsheet:true,
+         // spreadsheetSheetTabsElement:"#table-tabs", //insert tabs in element with id of table-tabs
       
       
-        editorEmptyValue:undefined, //ensure empty values are set to undefined so they arent included in spreadsheet output data
+          editorEmptyValue:undefined, //ensure empty values are set to undefined so they arent included in spreadsheet output data
       
       
       
@@ -67380,12 +67390,30 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
        keyhoja=key;
       pas.uCargarConsultas.ActualizaTitulosCol(keyhoja);
     };
+    this.AnlisisGrfico1Click = async function (Sender) {
+      var newform = null;
+      //window.open('http://localhost/GraficadorPas/TMSWeb/Debug/Project1.html');
+      window.open('https://idsfdg.github.io/GrafPrueba/');
+      return;
+      newform = pas.uGrafica.TfrmGrafica.$create("Create$1",[this]);
+      newform.SetCaption("Child form");
+      newform.SetCaption("Graficar conceptos");
+      newform.SetBorder(pas["WEBLib.Forms"].TFormBorderStyle.fbDialog);
+      window.location.hash = "subform";
+      window.location.hash = "graficar";
+      await newform.Load();
+      try {
+        await newform.Execute();
+      } finally {
+        newform = rtl.freeLoc(newform);
+      };
+    };
     this.LoadDFMValues = function () {
       pas["WEBLib.Forms"].TCustomForm.LoadDFMValues.call(this);
       this.WebDiv = pas["WEBLib.WebCtrls"].THTMLDiv.$create("Create$2",["tabExample"]);
       this.WebMemo1 = pas["WEBLib.StdCtrls"].TMemo.$create("Create$1",[this]);
       this.WebPanel5 = pas["WEBLib.ExtCtrls"].TPanel.$create("Create$1",[this]);
-      this.WebPanel1 = pas["WEBLib.ExtCtrls"].TPanel.$create("Create$1",[this]);
+      this.WebPanel1 = pas["WEBLib.ExtCtrls"].TPanel.$create("Create$2",["paginationElement"]);
       this.WebButton2 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebButton1 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebButton3 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
@@ -67410,6 +67438,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton11 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebButton12 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
       this.WebButton13 = pas["WEBLib.StdCtrls"].TButton.$create("Create$1",[this]);
+      this.WebScrollBox1 = pas["WEBLib.ExtCtrls"].TScrollBox.$create("Create$2",["paginacionSCR"]);
       this.WebHttpRequest1 = pas["WEBLib.REST"].THttpRequest.$create("Create$1",[this]);
       this.WebMainMenu1 = pas["WEBLib.Menus"].TMainMenu.$create("Create$1",[this]);
       this.Archivo1 = pas["WEBLib.Menus"].TMenuItem.$create("Create$1",[this]);
@@ -67434,6 +67463,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.Exportar2 = pas["WEBLib.Menus"].TMenuItem.$create("Create$1",[this]);
       this.Graficar1 = pas["WEBLib.Menus"].TMenuItem.$create("Create$1",[this]);
       this.Graficas1 = pas["WEBLib.Menus"].TMenuItem.$create("Create$1",[this]);
+      this.AnlisisGrfico1 = pas["WEBLib.Menus"].TMenuItem.$create("Create$1",[this]);
       this.WebDiv.BeforeLoadDFMValues();
       this.WebMemo1.BeforeLoadDFMValues();
       this.WebPanel5.BeforeLoadDFMValues();
@@ -67462,6 +67492,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.WebButton11.BeforeLoadDFMValues();
       this.WebButton12.BeforeLoadDFMValues();
       this.WebButton13.BeforeLoadDFMValues();
+      this.WebScrollBox1.BeforeLoadDFMValues();
       this.WebHttpRequest1.BeforeLoadDFMValues();
       this.WebMainMenu1.BeforeLoadDFMValues();
       this.Archivo1.BeforeLoadDFMValues();
@@ -67486,6 +67517,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
       this.Exportar2.BeforeLoadDFMValues();
       this.Graficar1.BeforeLoadDFMValues();
       this.Graficas1.BeforeLoadDFMValues();
+      this.AnlisisGrfico1.BeforeLoadDFMValues();
       try {
         this.SetName("Form1");
         this.SetWidth(701);
@@ -67505,7 +67537,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebDiv.SetLeft(0);
         this.WebDiv.SetTop(129);
         this.WebDiv.SetWidth(701);
-        this.WebDiv.SetHeight(271);
+        this.WebDiv.SetHeight(207);
         this.WebDiv.SetElementClassName("table-striped");
         this.WebDiv.SetAlign(pas["WEBLib.Controls"].TAlign.alClient);
         this.WebDiv.SetChildOrderEx(1);
@@ -67544,6 +67576,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebPanel5.FElementBodyClassName = "card-body";
         this.WebPanel5.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebPanel5.SetTabOrder(1);
+        this.WebPanel5.SetVisible(false);
         this.WebPanel1.SetParentComponent(this);
         this.WebPanel1.SetName("WebPanel1");
         this.WebPanel1.SetLeft(0);
@@ -67597,6 +67630,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton3.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebButton3.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.WebButton3.SetHeightPercent(100.000000000000000000);
+        this.WebButton3.SetVisible(false);
         this.WebButton3.SetWidthPercent(100.000000000000000000);
         this.SetEvent$1(this.WebButton3,this,"OnClick","WebButton3Click");
         this.WebButton4.SetParentComponent(this.WebPanel1);
@@ -67611,6 +67645,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton4.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebButton4.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.WebButton4.SetHeightPercent(100.000000000000000000);
+        this.WebButton4.SetVisible(false);
         this.WebButton4.SetWidthPercent(100.000000000000000000);
         this.SetEvent$1(this.WebButton4,this,"OnClick","WebButton4Click");
         this.WebButton5.SetParentComponent(this.WebPanel1);
@@ -67796,6 +67831,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebLabel1.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebLabel1.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.WebLabel1.SetHeightPercent(100.000000000000000000);
+        this.WebLabel1.SetVisible(false);
         this.WebLabel1.SetWidthPercent(100.000000000000000000);
         this.WebButton9.SetParentComponent(this.WebPanel4);
         this.WebButton9.SetName("WebButton9");
@@ -67809,6 +67845,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton9.SetElementFont(pas["WEBLib.Controls"].TElementFont.efCSS);
         this.WebButton9.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.WebButton9.SetHeightPercent(100.000000000000000000);
+        this.WebButton9.SetVisible(false);
         this.WebButton9.SetWidthPercent(100.000000000000000000);
         this.edPaciente.SetParentComponent(this.WebPanel4);
         this.edPaciente.SetName("edPaciente");
@@ -67822,6 +67859,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.edPaciente.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.edPaciente.SetHeightPercent(100.000000000000000000);
         this.edPaciente.SetReadOnly(true);
+        this.edPaciente.SetVisible(false);
         this.edPaciente.SetWidthPercent(100.000000000000000000);
         this.edPacNombre.SetParentComponent(this.WebPanel4);
         this.edPacNombre.SetName("edPacNombre");
@@ -67835,6 +67873,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.edPacNombre.SetHeightStyle(pas["WEBLib.Controls"].TSizeStyle.ssAuto);
         this.edPacNombre.SetHeightPercent(100.000000000000000000);
         this.edPacNombre.SetReadOnly(true);
+        this.edPacNombre.SetVisible(false);
         this.edPacNombre.SetWidthPercent(100.000000000000000000);
         this.WebButton11.SetParentComponent(this.WebPanel4);
         this.WebButton11.SetName("WebButton11");
@@ -67881,6 +67920,17 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton13.SetVisible(false);
         this.WebButton13.SetWidthPercent(100.000000000000000000);
         this.SetEvent$1(this.WebButton13,this,"OnClick","WebButton13Click");
+        this.WebScrollBox1.SetParentComponent(this);
+        this.WebScrollBox1.SetName("WebScrollBox1");
+        this.WebScrollBox1.SetLeft(0);
+        this.WebScrollBox1.SetTop(336);
+        this.WebScrollBox1.SetWidth(701);
+        this.WebScrollBox1.SetHeight(64);
+        this.WebScrollBox1.SetElementClassName("card");
+        this.WebScrollBox1.SetAlign(pas["WEBLib.Controls"].TAlign.alBottom);
+        this.WebScrollBox1.SetBorderStyle(pas["WEBLib.Controls"].TBorderStyle.bsSingle);
+        this.WebScrollBox1.SetChildOrderEx(3);
+        this.WebScrollBox1.SetScrollBars(pas["WEBLib.Controls"].TScrollStyle.ssHorizontal);
         this.WebHttpRequest1.SetParentComponent(this);
         this.WebHttpRequest1.SetName("WebHttpRequest1");
         this.SetEvent$1(this.WebHttpRequest1,this,"OnResponse","WebHttpRequest1Response");
@@ -67977,6 +68027,10 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.Graficas1.SetName("Graficas1");
         this.Graficas1.SetCaption("Graficas");
         this.SetEvent$1(this.Graficas1,this,"OnClick","Graficas1Click");
+        this.AnlisisGrfico1.SetParentComponent(this.Graficar1);
+        this.AnlisisGrfico1.SetName("AnlisisGrfico1");
+        this.AnlisisGrfico1.SetCaption("Análisis Gráfico");
+        this.SetEvent$1(this.AnlisisGrfico1,this,"OnClick","AnlisisGrfico1Click");
       } finally {
         this.WebDiv.AfterLoadDFMValues();
         this.WebMemo1.AfterLoadDFMValues();
@@ -68006,6 +68060,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.WebButton11.AfterLoadDFMValues();
         this.WebButton12.AfterLoadDFMValues();
         this.WebButton13.AfterLoadDFMValues();
+        this.WebScrollBox1.AfterLoadDFMValues();
         this.WebHttpRequest1.AfterLoadDFMValues();
         this.WebMainMenu1.AfterLoadDFMValues();
         this.Archivo1.AfterLoadDFMValues();
@@ -68030,6 +68085,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
         this.Exportar2.AfterLoadDFMValues();
         this.Graficar1.AfterLoadDFMValues();
         this.Graficas1.AfterLoadDFMValues();
+        this.AnlisisGrfico1.AfterLoadDFMValues();
       };
     };
     rtl.addIntf(this,pas["WEBLib.Controls"].IControl);
@@ -68087,6 +68143,8 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
     $r.addField("WebButton11",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addField("WebButton12",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
     $r.addField("WebButton13",pas["WEBLib.StdCtrls"].$rtti["TButton"]);
+    $r.addField("WebScrollBox1",pas["WEBLib.ExtCtrls"].$rtti["TScrollBox"]);
+    $r.addField("AnlisisGrfico1",pas["WEBLib.Menus"].$rtti["TMenuItem"]);
     $r.addMethod("WebButton1Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("WebButton2Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("WebButton3Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
@@ -68116,6 +68174,7 @@ rtl.module("Unit1",["System","SysUtils","Classes","JS","Web","WEBLib.Graphics","
     $r.addMethod("WebButton12Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("WebButton13Click",0,[["Sender",pas.System.$rtti["TObject"]]]);
     $r.addMethod("WebDivClick",0,[["Sender",pas.System.$rtti["TObject"]]]);
+    $r.addMethod("AnlisisGrfico1Click",0,[["Sender",pas.System.$rtti["TObject"]]],null,16,{attr: [pas.JS.AsyncAttribute,"Create"]});
   });
   this.Form1 = null;
 });
