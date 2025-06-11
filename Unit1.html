@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>TMS Web Project</title>
@@ -20,7 +20,7 @@
 
 <script>
 $("#exportbtn").click(function(e) {
-alert('entro exportbtn');
+//alert('entro exportbtn');
 
 
 
@@ -33,7 +33,6 @@ alert('entro exportbtn');
   var datac=[[String.fromCharCode(12),""],
              ["Consulta Medica", ""]
              ];
-
   //var datae = ["Estudio Medico",""];
   const datae = ["Estudio", "Clinico"];
   //var dataa = ["Analisis Lab.",""];
@@ -61,11 +60,25 @@ alert('entro exportbtn');
  var selnum = $("#edPaciente").val();
  console.log(selnum);
  console.log('numero',selnum);
- var selnum = $("#edPacNombre").val();
+ var selnom = $("#edPacNombre").val();
  console.log(selnum);
- console.log('nombre',selnum);
+ console.log('nombre',selnom);
+ console.log('data1',data1);
+ if (selnom.length > 0)
+ {
+ var data1filtro = [
+            { id: selnum, nombre: selnom}
+        ];
+    console.log('tabledata',data1filtro);
+  //   alert('entro filtro');
 
+ }
+ else
+ {
+    var data1filtro= table.getSheetData("uno");
+ }
 
+ console.log('data1 filtro',data1filtro);
 
  //  var position = table.getRowPosition(row);
 
@@ -99,7 +112,8 @@ alert('entro exportbtn');
 
   const table1 = new Tabulator("#tableOne", {
     //data: tabledata1, //assign data to table
-    data: data1, //assign data to table
+  //  data: data1, //assign data to table
+    data:data1filtro,
     layout: "fitDataFill", //fit columns to width of table (optional)
     autoColumns: true,
   });
@@ -143,7 +157,7 @@ var sheets = {
 };
 
     downloadXlxs = function(){
-    alert(' downloadXlxs');
+   // alert(' downloadXlxs');
 table0.download("xlsx", "data.xlsx", {sheets:sheets});
 };
 

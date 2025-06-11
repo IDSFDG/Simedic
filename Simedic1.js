@@ -65753,6 +65753,8 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
     
        edPaciente.value = selpacid;
        edPacNombre.value =selpacnom;
+      // alert (edPacNombre.value);
+     //  table.setFilter('B like '+edPacNombre.value);
     $mod.CargarConsultaMedica(selpacid);
     $mod.CargarEstudiosMedicos(selpacid);
     $mod.CargarAnalisisMedicos(selpacid);
@@ -66037,6 +66039,11 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
     
      //********************************************************************************
      //********************************************************************************
+    
+       // table.activeSheet("uno"); //make the info sheet active
+    
+      // alert (edPacNombre.value);
+      // table.setFilter("B", "like", edPacNombre.value);
     };
     xhr.send();
   };
