@@ -65546,7 +65546,7 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
      // const contents = db.exec("SELECT identificador as clave,nombre,rfc FROM TAB_PROSPECTOS WHERE identificador > 100");
     //  const contents = db.exec("SELECT id,nombre FROM tabla1");
     // const  contents = db.exec("SELECT identificador,clave,nombre FROM [pacientes-pruebas];");
-     const  contents = db.exec("SELECT clave,nombre FROM [pacientes-pruebas];");
+     const  contents = db.exec("SELECT clave,nombre FROM [pacientes-pruebas] WHERE genero = 'F';");
     
      //********************************************************************************
      //********************************************************************************
@@ -65672,7 +65672,7 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
         },
        // pagination:true, //enable pagination
       //  paginationSize:10, // this option can take any positive integer value
-        paginationSize:5,
+        paginationSize:10,
         paginationSizeSelector:[5, 10, 15],
         pagination:true,
         paginationElement:paginacionSCR, //build pagination controls in this element
@@ -65804,7 +65804,8 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
      //********************************************************************************
      // const contents = db.exec("SELECT identificador as clave,nombre,rfc FROM TAB_PROSPECTOS WHERE identificador > 100");
     //  const contents = db.exec("SELECT id,nombre FROM tabla1");
-     const  contents = db.exec("SELECT fecha,comentario,diagnosticon FROM ObtieneConsultasPacientes_2 where idpaciente = 11155;");
+    // const  contents = db.exec("SELECT fecha,comentario,diagnosticon FROM ObtieneConsultasPacientes_2 where idpaciente = 11155;");
+     const  contents = db.exec("SELECT fecha,comentario,diagnosticon FROM TABLA_CONSULTA_PRUEBAS;");
     
      //********************************************************************************
      //********************************************************************************
@@ -65895,7 +65896,8 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
      //********************************************************************************
      // const contents = db.exec("SELECT identificador as clave,nombre,rfc FROM TAB_PROSPECTOS WHERE identificador > 100");
     //  const contents = db.exec("SELECT id,nombre FROM tabla1");
-     const  contents = db.exec("SELECT fecha,comentario,tipo FROM ObtieneEstudiosAnalisisPacientes_2 where tipo = 'ESTUDIO' and idpaciente = 11154;");
+    // const  contents = db.exec("SELECT fecha,comentario,tipo FROM ObtieneEstudiosAnalisisPacientes_2 where tipo = 'ESTUDIO' and idpaciente = 11154;");
+     const  contents = db.exec("SELECT fecha,comentario,tipo FROM TABLA_ESTUDIOANALISIS_PRUEBA where tipo = 'ESTUDIO';");
     
      //********************************************************************************
      //********************************************************************************
@@ -65986,7 +65988,10 @@ rtl.module("uCargarConsultas",["System","SysUtils","Classes","JS","Web","WEBLib.
      //********************************************************************************
      // const contents = db.exec("SELECT identificador as clave,nombre,rfc FROM TAB_PROSPECTOS WHERE identificador > 100");
     //  const contents = db.exec("SELECT id,nombre FROM tabla1");
-     const  contents = db.exec("SELECT fecha,comentario,tipo FROM ObtieneEstudiosAnalisisPacientes_2 where tipo = 'ANALISIS' and idpaciente = 11154;");
+    // const  contents = db.exec("SELECT fecha,comentario,tipo FROM ObtieneEstudiosAnalisisPacientes_2 where tipo = 'ANALISIS' and idpaciente = 11154;");
+    
+     const  contents = db.exec("SELECT fecha,comentario,tipo FROM TABLA_ESTUDIOANALISIS_PRUEBA where tipo = 'ANALISIS';");
+    
     
      //********************************************************************************
      //********************************************************************************
